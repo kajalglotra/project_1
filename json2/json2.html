@@ -1,0 +1,57 @@
+<!doctype html>
+<html>
+ <head>
+   <title>JSON Assignment2</title>
+   <script> 
+     var data = {"info":[
+      {"first_name":"Simran" , "last_name":"Glotra", "date_of_birth":"09/01/1956"},
+      {"first_name":"Kajal" , "last_name":"Glotra", "date_of_birth":"09/09/1952"},
+      {"first_name":"Garvit" , "last_name":"Glotra", "date_of_birth":"11/11/1949"}
+     ]}
+   </script>
+ </head>
+ <body>
+    <div id="div1">
+    </div>
+ </body>
+ <script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
+ <script>
+    var represent="";
+    represent = represent +
+                "<table border=1 width='400' align='center' style='border-collapse: collapse;'>" +
+                  "<tr>" +
+                    "<th width='33%'>First Name</th>" +
+                    "<th width='34%'>Last Name</th>" +
+                    "<th width='33%'>Date of Birth</th>" +
+                  "</tr>"
+                "</table>";
+   function procedure(data)
+   {
+    var i=0;
+    while(i<data.info.length)
+     {
+      represent = represent + 
+                  "<table border=1 width='400' align='center' style='border-collapse: collapse;' >" +
+                    "<tr>" +
+                      "<td width='33%'>" +
+                         data.info[i].first_name +
+                      "</td>";
+      represent = represent + 
+                      "<td width='34%'>" + 
+                         data.info[i].last_name + 
+                      "</td>";
+      represent = represent +
+                      "<td width='33%'>" +
+                         data.info[i].date_of_birth +
+                      "</td>"
+                    "</tr>"
+                  "</table>";
+      i++;
+     }
+    }
+   $(document).ready(function () {
+    procedure(data); 
+       $('#div1').html(represent);
+     });
+ </script>
+</html>
