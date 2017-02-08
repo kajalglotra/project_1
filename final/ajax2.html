@@ -1,0 +1,85 @@
+<!doctype html>
+<html>
+   <head>
+     <script language="javascript" type="text/javascript" src="jquery.js"></script>
+     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+      <style>
+        a{
+        cursor:pointer;
+         }
+     </style>
+   </head>
+   <body>
+      <div class="container">
+        <div id="div1">
+        </div>
+      </div>
+    </body>
+   <script>
+        var html = "<br /><h3><center>Employee Table</center></h3>";
+       html+= "<table class='table' border=1 width='850' id='tbl'>";
+        html+=  "<tr>" +
+                  "<th><a onclick=' sort(&quot;name&quot;)'>Employee Name</a></th>" +
+                  "<th><a onclick=' sort(&quot;email&quot;)'>Email</a></th>" +
+                  "<th>Message</th>" +
+                  "<th><a onclick=' sort(&quot;dates&quot;)'>Date</</th>" +
+                "</tr>"
+      $.ajax({                                      
+       url: 'process.php', data: "", dataType: 'json', success: function(rows)       
+        { 
+       for (var i in rows)
+         {
+          var row = rows[i];
+          var employee_name = row[0];
+          var email = row[1];
+          var message = row[2];
+          var date = row[3];
+          html+= "<tr>" +
+                    "<td width='25%'>" + employee_name + "</td>" +
+                    "<td width='25%'>" + email + "</td>" +
+                    "<td width='25%'>" + message + "</td>" +
+                    "<td width='25%'>" + date + "</td>" +
+                 "</tr>";                  
+         }
+        html+= "</table>";
+        $("#div1").html(html);
+      }
+      });
+ 
+   </script>
+   <script>
+     var flag=false;
+    function  sort(abc){
+    flag=!(flag);
+    var html = "<br /><h3><center>Employee Table</center></h3>";
+   $.ajax({                                      
+     url: 'process.php?value='+flag +'&value2='+abc, data: "", dataType: 'json', success: function(rows)       
+      {
+        html+= "<table class='table' border=1 width='850' id='tbl'>";
+        html+=  "<tr>" +
+                  "<th><a onclick=' sort(&quot;name&quot;)' >Employee Name</a></th>" +
+                  "<th><a onclick=' sort(&quot;email&quot;)'>Email</a></th>" +
+                  "<th>Message</th>" +
+                  "<th><a onclick=' sort(&quot;dates&quot;)'>Date</a></th>" +
+                "</tr>"
+       for (var i in rows)
+         {
+          var row = rows[i];
+          var employee_name = row[0];
+          var email = row[1];
+          var message = row[2];
+          var date = row[3];
+          html+= "<tr>" +
+                    "<td width='25%'>" + employee_name + "</td>" +
+                    "<td width='25%'>" + email + "</td>" +
+                    "<td width='25%'>" + message + "</td>" +
+                    "<td width='25%'>" + date + "</td>" +
+                 "</tr>";                  
+         }
+        html+= "</table>";
+        $("#div1").html(html);
+      }
+     });
+     }
+  </script>
+</html>  
